@@ -1,14 +1,18 @@
 package com.tns.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
- 
+import com.tns.spring.entity.Course;
 import com.tns.spring.repository.StudentRepository;
  
 @Service
 public class StudentService {
  
     private final StudentRepository studentRepository;
+    @Autowired
+    @Qualifier("course")
+    private Course course;
  
     @Autowired
     public StudentService(StudentRepository studentRepository) {
@@ -19,5 +23,6 @@ public class StudentService {
     public void registerStudent() {
         System.out.println("Student Registered Successfully");
         studentRepository.saveStudent();
+        course.displayCourse();
     }
 }
